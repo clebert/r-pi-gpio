@@ -20,7 +20,7 @@
     "licenses": [
         {
             "type": "MIT",
-            "url": "https://raw.github.com/clebert/r-pi-gpio/master/LICENSE"
+            "url": "https://raw.githubusercontent.com/clebert/r-pi-gpio/master/LICENSE"
         }
     ],
     "main": "index.js",
