@@ -1,4 +1,4 @@
-# r-pi-gpio
+# r-pi-gpio [![NPM version](https://badge.fury.io/js/r-pi-gpio.png)](https://badge.fury.io/js/r-pi-gpio)
 
 > A Node.js API for GPIO on Raspberry Pi.
 
