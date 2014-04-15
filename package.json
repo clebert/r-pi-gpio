@@ -1,9 +1,11 @@
 {
     "name": "r-pi-gpio",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "description": "A Node.js API for GPIO on Raspberry Pi.",
     "keywords": [
-        "raspberry", "pi", "gpio"
+        "raspberry",
+        "pi",
+        "gpio"
     ],
     "author": {
         "name": "Clemens Akens",
