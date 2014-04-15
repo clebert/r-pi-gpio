@@ -1,0 +1,41 @@
+{
+    "name": "r-pi-gpio",
+    "version": "0.0.0",
+    "description": "A Node.js API for GPIO on Raspberry Pi.",
+    "keywords": [
+        "raspberry", "pi", "gpio"
+    ],
+    "author": {
+        "name": "Clemens Akens",
+        "email": "clebert@me.com",
+        "url": "http://clebert.com/"
+    },
+    "bugs": {
+        "url": "https://github.com/clebert/r-pi-gpio/issues"
+    },
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "inceptionYear": 2014,
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://raw.github.com/clebert/r-pi-gpio/master/LICENSE"
+        }
+    ],
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/clebert/r-pi-gpio.git"
+    },
+    "scripts": {
+        "test": "node_modules/.bin/grunt"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.4",
+        "grunt-bumpup": "~0.5.2",
+        "grunt-cli": "~0.1.13",
+        "grunt-contrib-jshint": "~0.10.0",
+        "grunt-module": "~0.1.2"
+    }
+}
