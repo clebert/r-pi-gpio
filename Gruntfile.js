@@ -106,4 +106,9 @@ module.exports = function (grunt) {
         grunt.task.run('module:license-copyright');
         grunt.task.run('module:release-publish');
     });
+
+    grunt.registerTask('travis', [
+        'default',
+        'mochacov:travis-coveralls'
+    ]);
 };
