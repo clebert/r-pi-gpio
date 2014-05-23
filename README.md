@@ -38,6 +38,10 @@ var level = gpio.getLevel();
 
 ```javascript
 gpio.setLevel(true);
+
+setTimeout(function () {
+    gpio.setLevel(false);
+}, 2000);
 ```
 
 ### gpio.setInput() => Object
