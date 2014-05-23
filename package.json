@@ -1,11 +1,12 @@
 {
     "name": "r-pi-gpio",
     "version": "0.1.0",
-    "description": "A Node.js API for GPIO on Raspberry Pi.",
+    "description": "A high performance, memory mapped, Node.js API for GPIO on Raspberry Pi.",
     "keywords": [
         "raspberry",
         "pi",
-        "gpio"
+        "gpio",
+        "mmap"
     ],
     "author": {
         "name": "Clemens Akens",
@@ -30,14 +31,33 @@
         "type": "git",
         "url": "https://github.com/clebert/r-pi-gpio.git"
     },
+    "config": {
+        "blanket": {
+            "data-cover-only": "index.js",
+            "data-cover-never": "node_modules/"
+        },
+        "mocha-cov-reporter": {
+            "threshold": 100,
+            "useColors": true
+        }
+    },
     "scripts": {
+        "install": "node-gyp configure build",
         "test": "node_modules/.bin/grunt"
     },
+    "dependencies": {
+        "nan": "~1.0.0",
+        "typeutil": "~3.1.4"
+    },
     "devDependencies": {
-        "grunt": "~0.4.4",
+        "extended-assert": "~1.1.0",
+        "grunt": "~0.4.5",
         "grunt-bumpup": "~0.5.2",
         "grunt-cli": "~0.1.13",
         "grunt-contrib-jshint": "~0.10.0",
-        "grunt-module": "~0.1.2"
+        "grunt-mocha-cov": "~0.2.1",
+        "grunt-module": "~0.1.2",
+        "mocha": "~1.19.0",
+        "mocha-cov-reporter": "~0.2.3"
     }
 }

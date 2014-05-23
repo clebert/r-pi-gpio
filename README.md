@@ -1,43 +1,48 @@
 # r-pi-gpio [![NPM version](https://badge.fury.io/js/r-pi-gpio.png)](https://badge.fury.io/js/r-pi-gpio)
 
-> A Node.js API for GPIO on Raspberry Pi.
+> A high performance, memory mapped, Node.js API for GPIO on Raspberry Pi.
 
 ## Installation
 
-    $ npm install r-pi-gpio --save
+```sh
+npm install r-pi-gpio --save
+```
 
 ## Usage
 
 ### Node.js
 
-    var GPIO = require('r-pi-gpio').GPIO;
+```javascript
+var UltrasonicSensor = require('r-pi-gpio').UltrasonicSensor;
+```
 
 ### API
 
-#### Constructor
+#### xxx
 
-* GPIO(id: number, direction: string) => Object
+```javascript
+xxx
+```
 
-#### Static methods
+### Example
 
-* GPIO.input(id: number) => Object
-* GPIO.output(id: number) => Object
-
-#### Instance methods
-
-* GPIO.prototype.destroy() => void
-* GPIO.prototype.write(value: boolean) => Object
-* GPIO.prototype.read() => boolean
+```sh
+sudo node ./node_modules/r-pi-gpio/example/onoff.js
+```
 
 ## Running the tests
 
 To run the test suite first install the development dependencies:
 
-    $ npm install
+```sh
+npm install
+```
 
 then run the tests:
 
-    $ npm test
+```sh
+npm test
+```
 
 ## License
 
