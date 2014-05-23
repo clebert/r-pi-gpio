@@ -1,4 +1,8 @@
-# r-pi-gpio [![NPM version](https://badge.fury.io/js/r-pi-gpio.png)](https://badge.fury.io/js/r-pi-gpio)
+# r-pi-gpio
+[![Build Status](https://travis-ci.org/clebert/r-pi-gpio.png?branch=master)](https://travis-ci.org/clebert/r-pi-gpio)
+[![Coverage Status](https://coveralls.io/repos/clebert/r-pi-gpio/badge.png)](https://coveralls.io/r/clebert/r-pi-gpio)
+[![Code Climate](https://codeclimate.com/github/clebert/r-pi-gpio.png)](https://codeclimate.com/github/clebert/r-pi-gpio)
+[![NPM version](https://badge.fury.io/js/r-pi-gpio.png)](https://badge.fury.io/js/r-pi-gpio)
 
 > A high performance, memory mapped, Node.js API for GPIO on Raspberry Pi.
 
@@ -13,21 +17,45 @@ npm install r-pi-gpio --save
 ### Node.js
 
 ```javascript
-var UltrasonicSensor = require('r-pi-gpio').UltrasonicSensor;
+var Gpio = require('r-pi-gpio');
 ```
 
-### API
+## API
 
-#### xxx
+### Gpio(pin: number) => void
 
 ```javascript
-xxx
+var gpio = new Gpio(10);
 ```
 
-### Example
+### gpio.getLevel() => boolean
+
+```javascript
+var level = gpio.getLevel();
+```
+
+### gpio.setLevel(level: boolean) => Object
+
+```javascript
+gpio.setLevel(true);
+```
+
+### gpio.setInput() => Object
+
+```javascript
+gpio.setInput();
+```
+
+### gpio.setOutput() => Object
+
+```javascript
+gpio.setOutput();
+```
+
+## Example
 
 ```sh
-sudo node ./node_modules/r-pi-gpio/example/onoff.js
+sudo node node_modules/r-pi-gpio/example/onoff.js
 ```
 
 ## Running the tests
