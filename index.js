@@ -1,50 +1,38 @@
 'use strict';
 
-var fs = require('fs');
+var gpio = require('./build/Release/gpio.node');
+var typeutil = require('typeutil');
 
-var rootPath = '/sys/class/gpio/';
-
-function GPIO(id, direction) {
-    var path = rootPath + 'gpio' + id + '/';
-
-    if (!fs.existsSync(path)) {
-        fs.writeFileSync(rootPath + 'export', id);
+var Gpio = typeutil.typify(function (pin) {
+    if (!(this instanceof Gpio)) {
+        throw new Error('Missing new keyword.');
     }
 
-    fs.writeFileSync(path + 'direction', direction);
+    if (!typeutil.isInteger(pin) || pin < 0 || pin > 53) {
+        throw new Error('Invalid pin.');
+    }
 
-    this.fd = fs.openSync(path + 'value', 'r+');
-    this.id = id;
-}
+    this.getLevel = function () {
+        return gpio.getLevel(pin);
+    };
 
-exports.GPIO = GPIO;
+    this.setLevel = function (level) {
+        gpio.setLevel(pin, !!level);
 
-GPIO.input = function (id) {
-    return new GPIO(id, 'in');
-};
+        return this;
+    };
 
-GPIO.output = function (id) {
-    return new GPIO(id, 'out');
-};
+    this.setInput = function () {
+        gpio.setInput(pin);
 
-GPIO.prototype.destroy = function () {
-    fs.closeSync(this.fd);
-    fs.writeFileSync(rootPath + 'unexport', this.id);
-};
+        return this;
+    };
 
-var zero = new Buffer('0');
-var one = new Buffer('1');
+    this.setOutput = function () {
+        gpio.setOutput(pin);
 
-GPIO.prototype.write = function (value) {
-    fs.writeSync(this.fd, value ? one : zero, 0, 1, 0);
+        return this;
+    };
+}, '(number) => void');
 
-    return this;
-};
-
-var buffer = new Buffer(1);
-
-GPIO.prototype.read = function () {
-    fs.readSync(this.fd, buffer, 0, 1, 0);
-
-    return buffer[0] === one[0];
-};
+module.exports = Gpio;

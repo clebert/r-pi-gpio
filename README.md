@@ -1,43 +1,80 @@
-# r-pi-gpio [![NPM version](https://badge.fury.io/js/r-pi-gpio.png)](https://badge.fury.io/js/r-pi-gpio)
+# r-pi-gpio
+[![Build Status](https://travis-ci.org/clebert/r-pi-gpio.png?branch=master)](https://travis-ci.org/clebert/r-pi-gpio)
+[![Coverage Status](https://coveralls.io/repos/clebert/r-pi-gpio/badge.png)](https://coveralls.io/r/clebert/r-pi-gpio)
+[![Code Climate](https://codeclimate.com/github/clebert/r-pi-gpio.png)](https://codeclimate.com/github/clebert/r-pi-gpio)
+[![NPM version](https://badge.fury.io/js/r-pi-gpio.png)](https://badge.fury.io/js/r-pi-gpio)
 
-> A Node.js API for GPIO on Raspberry Pi.
+> A high performance, memory mapped, Node.js API for GPIO on Raspberry Pi.
 
 ## Installation
 
-    $ npm install r-pi-gpio --save
+```sh
+npm install r-pi-gpio --save
+```
 
 ## Usage
 
 ### Node.js
 
-    var GPIO = require('r-pi-gpio').GPIO;
+```javascript
+var Gpio = require('r-pi-gpio');
+```
 
-### API
+## API
 
-#### Constructor
+### Gpio(pin: number) => void
 
-* GPIO(id: number, direction: string) => Object
+```javascript
+var gpio = new Gpio(10);
+```
 
-#### Static methods
+### gpio.getLevel() => boolean
 
-* GPIO.input(id: number) => Object
-* GPIO.output(id: number) => Object
+```javascript
+var level = gpio.getLevel();
+```
 
-#### Instance methods
+### gpio.setLevel(level: boolean) => Object
 
-* GPIO.prototype.destroy() => void
-* GPIO.prototype.write(value: boolean) => Object
-* GPIO.prototype.read() => boolean
+```javascript
+gpio.setLevel(true);
+
+setTimeout(function () {
+    gpio.setLevel(false);
+}, 2000);
+```
+
+### gpio.setInput() => Object
+
+```javascript
+gpio.setInput();
+```
+
+### gpio.setOutput() => Object
+
+```javascript
+gpio.setOutput();
+```
+
+## Example
+
+```sh
+sudo node node_modules/r-pi-gpio/example/onoff.js
+```
 
 ## Running the tests
 
 To run the test suite first install the development dependencies:
 
-    $ npm install
+```sh
+npm install
+```
 
 then run the tests:
 
-    $ npm test
+```sh
+npm test
+```
 
 ## License
 
