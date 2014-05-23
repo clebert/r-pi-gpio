@@ -7,11 +7,11 @@ var rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question('pin (default 10): ', function (pin) {
+rl.question('pin (default 18): ', function (pin) {
     pin = parseInt(pin, 10);
 
     if (isNaN(pin)) {
-        pin = 10;
+        pin = 18;
     }
 
     rl.close();
