@@ -7,7 +7,7 @@
                 "src/node_gpio.cc"
             ],
             "include_dirs" : [
-                "node_modules/nan"
+                "<!(node -e \"require('nan')\")"
             ]
         }
     ]

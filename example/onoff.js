@@ -1,5 +1,6 @@
 'use strict';
 
+var Gpio = require('../index.js');
 var readline = require('readline');
 
 var rl = readline.createInterface({
@@ -16,7 +17,6 @@ rl.question('pin (default 18): ', function (pin) {
 
     rl.close();
 
-    var Gpio = require('../index.js');
     var gpio = new Gpio(pin);
 
     gpio.setOutput();
