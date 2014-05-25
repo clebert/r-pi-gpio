@@ -98,6 +98,11 @@ sudo node node_modules/r-pi-gpio/example/onoff.js
 | GPIO 11 (SP10 SCLK) | 23  | 24  | GPIO 8 (SP10 CE0 N) |
 | GROUND              | 25  | 26  | GPIO 7 (SP10 CE1 N) |
 
+## Links
+
+- http://elinux.org/RPi_Low-level_peripherals
+- http://www.raspberrypi.org/wp-content/uploads/2012/02/BCM2835-ARM-Peripherals.pdf
+
 ## Running the tests
 
 To run the test suite first install the development dependencies:
