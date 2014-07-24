@@ -1,6 +1,6 @@
 'use strict';
 
-var Gpio = require('../index.js');
+var gpio = require('../lib/gpio');
 var readline = require('readline');
 
 var rl = readline.createInterface({
@@ -8,22 +8,16 @@ var rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question('pin (default 18): ', function (pin) {
-    pin = parseInt(pin, 10);
+var defaultPin = 18;
 
-    if (isNaN(pin)) {
-        pin = 18;
-    }
-
+rl.question('pin (default ' + defaultPin + '): ', function (response) {
     rl.close();
 
-    var gpio = new Gpio(pin);
-
-    gpio.setOutput();
-
     var level = false;
+    var pin = parseInt(response, 10);
+    var trigger = gpio.output(isNaN(pin) ? defaultPin : pin);
 
     setInterval(function () {
-        gpio.setLevel(level = !level);
+        trigger(level = !level);
     }, 500);
 });

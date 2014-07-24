@@ -28,7 +28,7 @@ namespace {
         NanReturnUndefined();
     }
 
-    static NAN_METHOD(setInput) {
+    static NAN_METHOD(setAsInput) {
         NanScope();
 
         const uint32_t pin = args[0]->ToInteger()->Value();
@@ -38,7 +38,7 @@ namespace {
         NanReturnUndefined();
     }
 
-    static NAN_METHOD(setOutput) {
+    static NAN_METHOD(setAsOutput) {
         NanScope();
 
         const uint32_t pin = args[0]->ToInteger()->Value();
@@ -59,8 +59,8 @@ namespace {
 
         NODE_SET_METHOD(exports, "getLevel", getLevel);
         NODE_SET_METHOD(exports, "setLevel", setLevel);
-        NODE_SET_METHOD(exports, "setInput", setInput);
-        NODE_SET_METHOD(exports, "setOutput", setOutput);
+        NODE_SET_METHOD(exports, "setAsInput", setAsInput);
+        NODE_SET_METHOD(exports, "setAsOutput", setAsOutput);
     }
 
     NODE_MODULE(gpio, init);

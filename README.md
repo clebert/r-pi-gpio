@@ -1,59 +1,64 @@
 # r-pi-gpio
-[![Build Status](https://travis-ci.org/clebert/r-pi-gpio.png?branch=master)](https://travis-ci.org/clebert/r-pi-gpio)
-[![Coverage Status](https://coveralls.io/repos/clebert/r-pi-gpio/badge.png)](https://coveralls.io/r/clebert/r-pi-gpio)
-[![Code Climate](https://codeclimate.com/github/clebert/r-pi-gpio.png)](https://codeclimate.com/github/clebert/r-pi-gpio)
-[![NPM version](https://badge.fury.io/js/r-pi-gpio.png)](https://badge.fury.io/js/r-pi-gpio)
 
-> A high performance, memory mapped, Node.js API for GPIO on Raspberry Pi.
+> A high performance, memory mapped, Node.js API for [GPIO](http://en.wikipedia.org/wiki/General-purpose_input/output) on the Raspberry Pi.
 
-## Installation
+[![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/clebert/r-pi-gpio/master/LICENSE)
+[![npm](http://img.shields.io/npm/v/r-pi-gpio.svg?style=flat)](https://www.npmjs.org/package/r-pi-gpio)
+[![downloads](http://img.shields.io/npm/dm/r-pi-gpio.svg?style=flat)](https://www.npmjs.org/package/r-pi-gpio)
+
+[![build](http://img.shields.io/travis/clebert/r-pi-gpio/master.svg?style=flat)](https://travis-ci.org/clebert/r-pi-gpio)
+[![coverage](http://img.shields.io/coveralls/clebert/r-pi-gpio/master.svg?style=flat)](https://coveralls.io/r/clebert/r-pi-gpio)
+[![code climate](http://img.shields.io/codeclimate/github/clebert/r-pi-gpio.svg?style=flat)](https://codeclimate.com/github/clebert/r-pi-gpio)
+[![dependencies](http://img.shields.io/david/clebert/r-pi-gpio.svg?style=flat)](https://david-dm.org/clebert/r-pi-gpio#info=dependencies&view=table)
+[![devDependencies](http://img.shields.io/david/dev/clebert/r-pi-gpio.svg?style=flat)](https://david-dm.org/clebert/r-pi-gpio#info=devDependencies&view=table)
+
+## Getting Started
+
+### Installation
 
 ```sh
 npm install r-pi-gpio --save
 ```
 
-## Usage
-
-### Node.js
+### Integration
 
 ```javascript
-var Gpio = require('r-pi-gpio');
+var gpio = require('r-pi-gpio');
 ```
 
 ## API
 
-### Gpio(pin: number) => void
+### gpio.input(pin)
+
+Creates a new GPIO input function and returns it.
 
 ```javascript
-var gpio = new Gpio(18);
+var input = gpio.input(18);
 ```
 
-### gpio.getLevel() => boolean
+### input()
+
+Returns true if the input voltage level is high, and false otherwise.
 
 ```javascript
-var level = gpio.getLevel();
+var level = input();
 ```
 
-### gpio.setLevel(level: boolean) => Object
+### gpio.output(pin)
+
+Creates a new GPIO output function and returns it.
 
 ```javascript
-gpio.setLevel(true);
-
-setTimeout(function () {
-    gpio.setLevel(false);
-}, 2000);
+var output = gpio.output(18);
 ```
 
-### gpio.setInput() => Object
+### output(level)
+
+Sets the output voltage level to high or low.
 
 ```javascript
-gpio.setInput();
-```
-
-### gpio.setOutput() => Object
-
-```javascript
-gpio.setOutput();
+output(true);
+output(false);
 ```
 
 ## Example
@@ -103,7 +108,7 @@ sudo node node_modules/r-pi-gpio/example/onoff.js
 - http://elinux.org/RPi_Low-level_peripherals
 - http://www.raspberrypi.org/wp-content/uploads/2012/02/BCM2835-ARM-Peripherals.pdf
 
-## Running the tests
+## Running Tests
 
 To run the test suite first install the development dependencies:
 
@@ -116,7 +121,3 @@ then run the tests:
 ```sh
 npm test
 ```
-
-## License
-
-Licensed under the MIT license.

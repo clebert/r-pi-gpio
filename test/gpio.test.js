@@ -1,155 +1,154 @@
-/* global describe, it */
+/* global beforeEach, describe, it */
 
 'use strict';
 
 var assert = require('extended-assert');
-var mock = assert.requireMock(__dirname, '../build/Release/gpio.node', {});
-var Gpio = require('../index.js');
+var mock = assert.requireFileMock(__dirname, '../build/Release/gpio.node', {});
+var gpio = require('../lib/gpio');
 
-describe('Gpio()', function () {
-
-    it('should throw an illegal-arguments error', function () {
-        assert.throwsError(function () {
-            return new Gpio();
-        }, 'TypeError', '(!>number) => void');
+describe('gpio', function () {
+    beforeEach(function () {
+        mock.getLevel = function () {};
+        mock.setLevel = function () {};
+        mock.setAsInput = function () {};
+        mock.setAsOutput = function () {};
     });
 
-    it('should throw a missing-new-keyword error', function () {
-        assert.throwsError(function () {
-            /* jshint -W064 */
+    describe('.input()', function () {
+        it('throws an error', function () {
+            var message = 'Illegal argument: pin';
 
-            Gpio(0);
-        }, 'Error', 'Missing new keyword.');
+            assert.throwsError(function () {
+                gpio.input();
+            }, 'Error', message);
+
+            assert.throwsError(function () {
+                gpio.input(NaN);
+            }, 'Error', message);
+
+            assert.throwsError(function () {
+                gpio.input(-1);
+            }, 'Error', message);
+
+            assert.throwsError(function () {
+                gpio.input(54);
+            }, 'Error', message);
+        });
+
+        it('calls native gpio.setAsInput() once with the given pin', function () {
+            var called = 0;
+
+            mock.setAsInput = function (pin) {
+                assert.strictEqual(pin, 53);
+
+                called += 1;
+            };
+
+            gpio.input(53);
+
+            assert.strictEqual(called, 1);
+        });
+
+        it('returns a function', function () {
+            assert.strictEqual(typeof gpio.input(0), 'function');
+            assert.strictEqual(typeof gpio.input(53), 'function');
+        });
     });
 
-    it('should not throw an invalid-pin error', function () {
-        var type = 'Error';
-        var message = 'Invalid pin.';
-
-        assert.doesNotThrowError(function () {
-            return new Gpio(0);
-        }, type, message);
-
-        assert.doesNotThrowError(function () {
-            return new Gpio(53);
-        }, type, message);
-    });
-
-    it('should throw an invalid-pin error', function () {
-        var type = 'Error';
-        var message = 'Invalid pin.';
-
-        assert.throwsError(function () {
-            return new Gpio(-1);
-        }, type, message);
-
-        assert.throwsError(function () {
-            return new Gpio(54);
-        }, type, message);
-
-        assert.throwsError(function () {
-            return new Gpio(0.1);
-        }, type, message);
-
-        assert.throwsError(function () {
-            return new Gpio(53.1);
-        }, type, message);
-    });
-
-    describe('.getLevel()', function () {
-
-        it('should call the corresponding mock funtion with pin-53 as ' +
-            'argument and return its return value', function () {
-
-            var gpio = new Gpio(53);
-            var returnValue = {};
+    describe('input()', function () {
+        it('calls native gpio.getLevel() once with the given pin', function () {
+            var called = 0;
 
             mock.getLevel = function (pin) {
                 assert.strictEqual(pin, 53);
 
-                return returnValue;
+                called += 1;
             };
 
-            assert.strictEqual(gpio.getLevel(), returnValue);
+            gpio.input(53)();
+
+            assert.strictEqual(called, 1);
+        });
+
+        it('returns a boolean value', function () {
+            mock.getLevel = function () {
+                return 0;
+            };
+
+            assert.strictEqual(gpio.input(53)(), false);
+
+            mock.getLevel = function () {
+                return 1;
+            };
+
+            assert.strictEqual(gpio.input(53)(), true);
         });
     });
 
-    describe('.setLevel()', function () {
+    describe('.output()', function () {
+        it('throws an error', function () {
+            var message = 'Illegal argument: pin';
 
-        it('should call the corresponding mock funtion with pin-53 and true ' +
-            'as arguments and return `this`', function () {
+            assert.throwsError(function () {
+                gpio.output();
+            }, 'Error', message);
 
-            var gpio = new Gpio(53);
+            assert.throwsError(function () {
+                gpio.output(NaN);
+            }, 'Error', message);
 
-            var called;
+            assert.throwsError(function () {
+                gpio.output(-1);
+            }, 'Error', message);
+
+            assert.throwsError(function () {
+                gpio.output(54);
+            }, 'Error', message);
+        });
+
+        it('calls native gpio.setAsOutput() once with the given pin', function () {
+            var called = 0;
+
+            mock.setAsOutput = function (pin) {
+                assert.strictEqual(pin, 53);
+
+                called += 1;
+            };
+
+            gpio.output(53);
+
+            assert.strictEqual(called, 1);
+        });
+
+        it('returns a function', function () {
+            assert.strictEqual(typeof gpio.output(0), 'function');
+            assert.strictEqual(typeof gpio.output(53), 'function');
+        });
+    });
+
+    describe('output()', function () {
+        it('calls native gpio.setLevel() once with the given pin and a level as boolean value', function () {
+            var called = 0;
 
             mock.setLevel = function (pin, level) {
                 assert.strictEqual(pin, 53);
-                assert.strictEqual(level, true);
+                assert.strictEqual(level, called > 0);
 
-                called = true;
+                called += 1;
             };
 
-            assert.strictEqual(gpio.setLevel(1), gpio);
-            assert.strictEqual(called, true);
+            gpio.output(53)(0);
+            gpio.output(53)(1);
+
+            assert.strictEqual(called, 2);
         });
 
-        it('should call the corresponding mock funtion with pin-10 and false ' +
-            'as arguments and return `this`', function () {
-
-            var gpio = new Gpio(10);
-
-            var called;
-
-            mock.setLevel = function (pin, level) {
-                assert.strictEqual(pin, 10);
-                assert.strictEqual(level, false);
-
-                called = true;
+        it('returns undefined', function () {
+            mock.setLevel = function () {
+                return 1;
             };
 
-            assert.strictEqual(gpio.setLevel(0), gpio);
-            assert.strictEqual(called, true);
-        });
-    });
-
-    describe('.setInput()', function () {
-
-        it('should call the corresponding mock funtion with pin-53 as ' +
-            'argument and return `this`', function () {
-
-            var gpio = new Gpio(53);
-
-            var called;
-
-            mock.setInput = function (pin) {
-                assert.strictEqual(pin, 53);
-
-                called = true;
-            };
-
-            assert.strictEqual(gpio.setInput(), gpio);
-            assert.strictEqual(called, true);
-        });
-    });
-
-    describe('.setOutput()', function () {
-
-        it('should call the corresponding mock funtion with pin-53 as ' +
-            'argument and return `this`', function () {
-
-            var gpio = new Gpio(53);
-
-            var called;
-
-            mock.setOutput = function (pin) {
-                assert.strictEqual(pin, 53);
-
-                called = true;
-            };
-
-            assert.strictEqual(gpio.setOutput(), gpio);
-            assert.strictEqual(called, true);
+            assert.strictEqual(gpio.output(53)(), void 0);
         });
     });
 });

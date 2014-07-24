@@ -12,11 +12,11 @@ namespace RPiGpio {
 
     bool getLevel(volatile uint32_t *memory, const uint32_t pin);
 
-    volatile uint32_t *getMemory();
+    void setLevel(volatile uint32_t *memory, const uint32_t pin, const bool level);
 
     void setDirection(volatile uint32_t *memory, const uint32_t pin, const Direction direction);
 
-    void setLevel(volatile uint32_t *memory, const uint32_t pin, const bool level);
+    volatile uint32_t *getMemory();
 }
 
 #endif
