@@ -67,7 +67,7 @@ output(false);
 sudo node node_modules/r-pi-gpio/example/onoff.js
 ```
 
-![Example: onoff.svg](https://raw.githubusercontent.com/clebert/r-pi-gpio/master/example/onoff.svg)
+![Example: onoff.png](https://raw.githubusercontent.com/clebert/r-pi-gpio/master/example/onoff.png)
 
 ## Raspberry Pi GPIO Pin Layout (Revision 1)
 
