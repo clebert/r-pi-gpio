@@ -33,7 +33,7 @@ var gpio = require('r-pi-gpio');
 Creates a new GPIO input function and returns it.
 
 ```javascript
-var input = gpio.input(18);
+var input = gpio.input(4);
 ```
 
 ### input()
@@ -49,7 +49,7 @@ var level = input();
 Creates a new GPIO output function and returns it.
 
 ```javascript
-var output = gpio.output(18);
+var output = gpio.output(4);
 ```
 
 ### output(level)
@@ -66,6 +66,8 @@ output(false);
 ```sh
 sudo node node_modules/r-pi-gpio/example/onoff.js
 ```
+
+![Example: onoff.svg](https://raw.githubusercontent.com/clebert/r-pi-gpio/master/example/onoff.svg)
 
 ## Raspberry Pi GPIO Pin Layout (Revision 1)
 

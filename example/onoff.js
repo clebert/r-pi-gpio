@@ -8,7 +8,7 @@ var rl = readline.createInterface({
     output: process.stdout
 });
 
-var defaultPin = 18;
+var defaultPin = 4;
 
 rl.question('pin (default ' + defaultPin + '): ', function (response) {
     rl.close();
