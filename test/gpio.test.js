@@ -6,6 +6,26 @@ var assert = require('extended-assert');
 var mock = assert.requireFileMock(__dirname, '../build/Release/gpio.node', {});
 var gpio = require('../lib/gpio');
 
+var testTypeErrors = function (method) {
+    it('throws a type error', function () {
+        assert.throwsError(function () {
+            method();
+        }, 'TypeError', 'Illegal argument: undefined');
+
+        assert.throwsError(function () {
+            method(NaN);
+        }, 'TypeError', 'Illegal argument: null');
+
+        assert.throwsError(function () {
+            method(-1);
+        }, 'TypeError', 'Illegal argument: -1');
+
+        assert.throwsError(function () {
+            method(54);
+        }, 'TypeError', 'Illegal argument: 54');
+    });
+};
+
 describe('gpio', function () {
     beforeEach(function () {
         mock.getLevel = function () {};
@@ -15,26 +35,6 @@ describe('gpio', function () {
     });
 
     describe('.input()', function () {
-        it('throws an error', function () {
-            var message = 'Illegal argument: pin';
-
-            assert.throwsError(function () {
-                gpio.input();
-            }, 'Error', message);
-
-            assert.throwsError(function () {
-                gpio.input(NaN);
-            }, 'Error', message);
-
-            assert.throwsError(function () {
-                gpio.input(-1);
-            }, 'Error', message);
-
-            assert.throwsError(function () {
-                gpio.input(54);
-            }, 'Error', message);
-        });
-
         it('calls native gpio.setAsInput() once with the given pin', function () {
             var called = 0;
 
@@ -53,6 +53,8 @@ describe('gpio', function () {
             assert.strictEqual(typeof gpio.input(0), 'function');
             assert.strictEqual(typeof gpio.input(53), 'function');
         });
+
+        testTypeErrors(gpio.input);
     });
 
     describe('input()', function () {
@@ -86,26 +88,6 @@ describe('gpio', function () {
     });
 
     describe('.output()', function () {
-        it('throws an error', function () {
-            var message = 'Illegal argument: pin';
-
-            assert.throwsError(function () {
-                gpio.output();
-            }, 'Error', message);
-
-            assert.throwsError(function () {
-                gpio.output(NaN);
-            }, 'Error', message);
-
-            assert.throwsError(function () {
-                gpio.output(-1);
-            }, 'Error', message);
-
-            assert.throwsError(function () {
-                gpio.output(54);
-            }, 'Error', message);
-        });
-
         it('calls native gpio.setAsOutput() once with the given pin', function () {
             var called = 0;
 
@@ -124,6 +106,8 @@ describe('gpio', function () {
             assert.strictEqual(typeof gpio.output(0), 'function');
             assert.strictEqual(typeof gpio.output(53), 'function');
         });
+
+        testTypeErrors(gpio.output);
     });
 
     describe('output()', function () {
