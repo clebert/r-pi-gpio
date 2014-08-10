@@ -1,6 +1,6 @@
 'use strict';
 
-var gpio = require('../lib/gpio');
+var gpio     = require('../lib/gpio');
 var readline = require('readline');
 
 var rl = readline.createInterface({

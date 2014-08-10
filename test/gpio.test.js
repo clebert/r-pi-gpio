@@ -3,8 +3,8 @@
 'use strict';
 
 var assert = require('extended-assert');
-var mock = assert.requireFileMock(__dirname, '../build/Release/gpio.node', {});
-var gpio = require('../lib/gpio');
+var mock   = assert.requireFileMock(__dirname, '../build/Release/gpio.node', {});
+var gpio   = require('../lib/gpio');
 
 var testTypeErrors = function (method) {
     it('throws a type error', function () {
@@ -28,9 +28,9 @@ var testTypeErrors = function (method) {
 
 describe('gpio', function () {
     beforeEach(function () {
-        mock.getLevel = function () {};
-        mock.setLevel = function () {};
-        mock.setAsInput = function () {};
+        mock.getLevel    = function () {};
+        mock.setLevel    = function () {};
+        mock.setAsInput  = function () {};
         mock.setAsOutput = function () {};
     });
 
