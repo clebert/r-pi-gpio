@@ -63,6 +63,8 @@ output(false);
 
 ## Example
 
+This example needs access to the physical memory, so it must run as root.
+
 ```sh
 sudo node node_modules/r-pi-gpio/example/onoff.js
 ```
