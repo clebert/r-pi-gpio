@@ -2,121 +2,156 @@
 
 'use strict';
 
-var assert = require('extended-assert');
-var mock   = assert.requireFileMock(__dirname, '../build/Release/gpio.node', {});
-var gpio   = require('../lib/gpio');
+var assert     = require('expressive-assertion');
+var mock       = require('node-mock');
+var nativeGpio = mock.require('../build/Release/gpio.node', __dirname, {});
+var gpio       = require('../lib/gpio.js');
+var ts         = require('typesystem');
 
-var testTypeErrors = function (method) {
-    it('throws a type error', function () {
-        assert.throwsError(function () {
-            method();
-        }, 'TypeError', 'Illegal argument: undefined');
-
-        assert.throwsError(function () {
+var testAssertionErrors = function (method) {
+    it('throws an assertion error', function () {
+        assert.throws(function () {
             method(NaN);
-        }, 'TypeError', 'Illegal argument: null');
+        }, function (exception) {
+            return exception.name === 'AssertionError';
+        }, function (exception) {
+            return /ts\.isInteger\(pin\)/.test(exception);
+        });
 
-        assert.throwsError(function () {
+        assert.throws(function () {
             method(-1);
-        }, 'TypeError', 'Illegal argument: -1');
+        }, function (exception) {
+            return exception.name === 'AssertionError';
+        }, function (exception) {
+            return /pin >= 0/.test(exception);
+        });
 
-        assert.throwsError(function () {
+        assert.throws(function () {
             method(54);
-        }, 'TypeError', 'Illegal argument: 54');
+        }, function (exception) {
+            return exception.name === 'AssertionError';
+        }, function (exception) {
+            return /pin <= 53/.test(exception);
+        });
     });
 };
 
 describe('gpio', function () {
     beforeEach(function () {
-        mock.getLevel    = function () {};
-        mock.setLevel    = function () {};
-        mock.setAsInput  = function () {};
-        mock.setAsOutput = function () {};
+        nativeGpio.configureAsInput  = function () {};
+        nativeGpio.configureAsOutput = function () {};
+        nativeGpio.getLevel          = function () {};
+        nativeGpio.setLevel          = function () {};
     });
 
     describe('.input()', function () {
-        it('calls native gpio.setAsInput() once with the given pin', function () {
+        it('calls nativeGpio.configureAsInput() once with the given pin', function () {
             var called = 0;
 
-            mock.setAsInput = function (pin) {
-                assert.strictEqual(pin, 53);
+            nativeGpio.configureAsInput = function (pin) {
+                assert(function () {
+                    return pin === 53;
+                });
 
                 called += 1;
             };
 
             gpio.input(53);
 
-            assert.strictEqual(called, 1);
+            assert(function () {
+                return called === 1;
+            });
         });
 
-        it('returns a function', function () {
-            assert.strictEqual(typeof gpio.input(0), 'function');
-            assert.strictEqual(typeof gpio.input(53), 'function');
+        it('returns an input function', function () {
+            assert(function () {
+                return ts.isFunction(gpio.input(0));
+            }, function () {
+                return ts.isFunction(gpio.input(53));
+            });
         });
 
-        testTypeErrors(gpio.input);
+        testAssertionErrors(gpio.input);
     });
 
     describe('input()', function () {
-        it('calls native gpio.getLevel() once with the given pin', function () {
+        it('calls nativeGpio.getLevel() once with the given pin', function () {
             var called = 0;
 
-            mock.getLevel = function (pin) {
-                assert.strictEqual(pin, 53);
+            nativeGpio.getLevel = function (pin) {
+                assert(function () {
+                    return pin === 53;
+                });
 
                 called += 1;
             };
 
             gpio.input(53)();
 
-            assert.strictEqual(called, 1);
+            assert(function () {
+                return called === 1;
+            });
         });
 
         it('returns a boolean value', function () {
-            mock.getLevel = function () {
+            nativeGpio.getLevel = function () {
                 return 0;
             };
 
-            assert.strictEqual(gpio.input(53)(), false);
+            assert(function () {
+                return gpio.input(53)() === false;
+            });
 
-            mock.getLevel = function () {
+            nativeGpio.getLevel = function () {
                 return 1;
             };
 
-            assert.strictEqual(gpio.input(53)(), true);
+            assert(function () {
+                return gpio.input(53)() === true;
+            });
         });
     });
 
     describe('.output()', function () {
-        it('calls native gpio.setAsOutput() once with the given pin', function () {
+        it('calls nativeGpio.configureAsOutput() once with the given pin', function () {
             var called = 0;
 
-            mock.setAsOutput = function (pin) {
-                assert.strictEqual(pin, 53);
+            nativeGpio.configureAsOutput = function (pin) {
+                assert(function () {
+                    return pin === 53;
+                });
 
                 called += 1;
             };
 
             gpio.output(53);
 
-            assert.strictEqual(called, 1);
+            assert(function () {
+                return called === 1;
+            });
         });
 
-        it('returns a function', function () {
-            assert.strictEqual(typeof gpio.output(0), 'function');
-            assert.strictEqual(typeof gpio.output(53), 'function');
+        it('returns an output function', function () {
+            assert(function () {
+                return ts.isFunction(gpio.output(0));
+            }, function () {
+                return ts.isFunction(gpio.output(53));
+            });
         });
 
-        testTypeErrors(gpio.output);
+        testAssertionErrors(gpio.output);
     });
 
     describe('output()', function () {
-        it('calls native gpio.setLevel() once with the given pin and a level as boolean value', function () {
+        it('calls nativeGpio.setLevel() once with the given pin and a level as boolean value', function () {
             var called = 0;
 
-            mock.setLevel = function (pin, level) {
-                assert.strictEqual(pin, 53);
-                assert.strictEqual(level, called > 0);
+            nativeGpio.setLevel = function (pin, level) {
+                assert(function () {
+                    return pin === 53;
+                }, function () {
+                    return level === called > 0;
+                });
 
                 called += 1;
             };
@@ -124,15 +159,19 @@ describe('gpio', function () {
             gpio.output(53)(0);
             gpio.output(53)(1);
 
-            assert.strictEqual(called, 2);
+            assert(function () {
+                return called === 2;
+            });
         });
 
         it('returns undefined', function () {
-            mock.setLevel = function () {
+            nativeGpio.setLevel = function () {
                 return 1;
             };
 
-            assert.strictEqual(gpio.output(53)(), void 0);
+            assert(function () {
+                return ts.isUndefined(gpio.output(53)());
+            });
         });
     });
 });
