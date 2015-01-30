@@ -71,6 +71,12 @@ sudo node node_modules/r-pi-gpio/example/onoff.js
 
 ![Example: onoff.png](https://raw.githubusercontent.com/clebert/r-pi-gpio/master/example/onoff.png)
 
+> A quick word about the electronics involved. LEDs are Light Emitting Diodes and the diode part is important for us – they only pass electricity one way, so we need to make sure we put them in the right way round. They have a long leg and a slightly shorter leg. The long leg goes to the plus side and the shorter leg to the negative (or 0v) side. If we’re cut the legs short (as I have done here), then another way is to look at the side of the LED – there will be a flat section. Think of the flat as a minus sign and connect that to the 0v side of the circuit.
+>
+> If we allow too much current through the LED, it will burn very bright for a very short period of time before it burns out, so we need a resistor to limit the current. Calculating the resistor value is not difficult but for now, just use anything from 270Ω to 330Ω. Anything higher will make the LED dimmer.
+>
+> -- [GPIO Examples - A single LED](https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/)
+
 ## Raspberry Pi Model A/B (Rev 1.0)
 
 | Assignment         | Pin | Pin | Assignment         |
@@ -132,7 +138,7 @@ sudo node node_modules/r-pi-gpio/example/onoff.js
 | GPIO 26            | 37  | 38  | GPIO 20            |
 | GROUND             | 39  | 40  | GPIO 21            |
 
-## Links
+## Related Links
 
 - [RPi Low-level Peripherals](http://elinux.org/RPi_Low-level_peripherals)
 - [BCM2835 ARM Peripherals ](http://www.raspberrypi.org/wp-content/uploads/2012/02/BCM2835-ARM-Peripherals.pdf)
