@@ -1,6 +1,6 @@
 {
     "name": "r-pi-gpio",
-    "version": "2.1.3",
+    "version": "2.2.0",
     "description": "A high performance, memory mapped, Node.js API for GPIO on the Raspberry Pi.",
     "keywords": [
         "raspberry",
