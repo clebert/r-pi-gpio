@@ -11,27 +11,11 @@ var ts         = require('typesystem');
 var testAssertionErrors = function (method) {
     it('throws an assertion error', function () {
         assert.throws(function () {
-            method(NaN);
+            method();
         }, function (exception) {
             return exception.name === 'AssertionError';
         }, function (exception) {
-            return /ts\.isInteger\(pin\)/.test(exception);
-        });
-
-        assert.throws(function () {
-            method(-1);
-        }, function (exception) {
-            return exception.name === 'AssertionError';
-        }, function (exception) {
-            return /pin >= 0/.test(exception);
-        });
-
-        assert.throws(function () {
-            method(54);
-        }, function (exception) {
-            return exception.name === 'AssertionError';
-        }, function (exception) {
-            return /pin <= 53/.test(exception);
+            return /ts\.isInteger\(value\) && value >= 0 && value <= 53/.test(exception);
         });
     });
 };
