@@ -44,7 +44,7 @@ describe('gpio', function () {
         nativeGpio.setLevel          = function () {};
     });
 
-    describe('.input()', function () {
+    describe('.createInput()', function () {
         it('calls nativeGpio.configureAsInput() once with the given pin', function () {
             var called = 0;
 
@@ -56,7 +56,7 @@ describe('gpio', function () {
                 called += 1;
             };
 
-            gpio.input(53);
+            gpio.createInput(53);
 
             assert(function () {
                 return called === 1;
@@ -65,16 +65,22 @@ describe('gpio', function () {
 
         it('returns an input function', function () {
             assert(function () {
-                return ts.isFunction(gpio.input(0));
+                return ts.isFunction(gpio.createInput(0));
             }, function () {
-                return ts.isFunction(gpio.input(53));
+                return ts.isFunction(gpio.createInput(53));
             });
         });
 
-        testAssertionErrors(gpio.input);
+        testAssertionErrors(gpio.createInput);
     });
 
     describe('input()', function () {
+        var input;
+
+        beforeEach(function () {
+            input = gpio.createInput(53);
+        });
+
         it('calls nativeGpio.getLevel() once with the given pin', function () {
             var called = 0;
 
@@ -86,7 +92,7 @@ describe('gpio', function () {
                 called += 1;
             };
 
-            gpio.input(53)();
+            input();
 
             assert(function () {
                 return called === 1;
@@ -95,24 +101,24 @@ describe('gpio', function () {
 
         it('returns a boolean value', function () {
             nativeGpio.getLevel = function () {
-                return 0;
-            };
-
-            assert(function () {
-                return gpio.input(53)() === false;
-            });
-
-            nativeGpio.getLevel = function () {
                 return 1;
             };
 
             assert(function () {
-                return gpio.input(53)() === true;
+                return input() === true;
+            });
+
+            nativeGpio.getLevel = function () {
+                return 0;
+            };
+
+            assert(function () {
+                return input() === false;
             });
         });
     });
 
-    describe('.output()', function () {
+    describe('.createOutput()', function () {
         it('calls nativeGpio.configureAsOutput() once with the given pin', function () {
             var called = 0;
 
@@ -124,7 +130,7 @@ describe('gpio', function () {
                 called += 1;
             };
 
-            gpio.output(53);
+            gpio.createOutput(53);
 
             assert(function () {
                 return called === 1;
@@ -133,31 +139,37 @@ describe('gpio', function () {
 
         it('returns an output function', function () {
             assert(function () {
-                return ts.isFunction(gpio.output(0));
+                return ts.isFunction(gpio.createOutput(0));
             }, function () {
-                return ts.isFunction(gpio.output(53));
+                return ts.isFunction(gpio.createOutput(53));
             });
         });
 
-        testAssertionErrors(gpio.output);
+        testAssertionErrors(gpio.createOutput);
     });
 
     describe('output()', function () {
-        it('calls nativeGpio.setLevel() once with the given pin and a level as boolean value', function () {
+        var output;
+
+        beforeEach(function () {
+            output = gpio.createOutput(53);
+        });
+
+        it('calls nativeGpio.setLevel() once with the given pin and a boolean level value', function () {
             var called = 0;
 
             nativeGpio.setLevel = function (pin, level) {
                 assert(function () {
                     return pin === 53;
                 }, function () {
-                    return level === called > 0;
+                    return level === (called === 0);
                 });
 
                 called += 1;
             };
 
-            gpio.output(53)(0);
-            gpio.output(53)(1);
+            output(1);
+            output(0);
 
             assert(function () {
                 return called === 2;
@@ -170,7 +182,9 @@ describe('gpio', function () {
             };
 
             assert(function () {
-                return ts.isUndefined(gpio.output(53)());
+                return ts.isUndefined(output(1));
+            }, function () {
+                return ts.isUndefined(output(0));
             });
         });
     });

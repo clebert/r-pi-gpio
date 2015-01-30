@@ -14,7 +14,7 @@ rl.question('pin (default ' + defaultPin + '): ', function (response) {
     rl.close();
 
     var pin     = parseInt(response, 10);
-    var trigger = gpio.output(isNaN(pin) ? defaultPin : pin);
+    var trigger = gpio.createOutput(isNaN(pin) ? defaultPin : pin);
 
     var level;
 

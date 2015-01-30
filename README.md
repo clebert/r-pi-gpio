@@ -28,12 +28,12 @@ var gpio = require('r-pi-gpio');
 
 ## API
 
-### gpio.input(pin)
+### gpio.createInput(pin)
 
 Creates a new GPIO input function and returns it.
 
 ```javascript
-var input = gpio.input(4);
+var input = gpio.createInput(4);
 ```
 
 ### input()
@@ -44,12 +44,12 @@ Returns true if the input voltage level is high, and false otherwise.
 var level = input();
 ```
 
-### gpio.output(pin)
+### gpio.createOutput(pin)
 
 Creates a new GPIO output function and returns it.
 
 ```javascript
-var output = gpio.output(4);
+var output = gpio.createOutput(4);
 ```
 
 ### output(level)
