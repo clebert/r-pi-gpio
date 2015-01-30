@@ -66,10 +66,10 @@ output(false);
 This example needs access to the physical memory, so it must run as root.
 
 ```sh
-sudo node node_modules/r-pi-gpio/example/onoff.js
+sudo node node_modules/r-pi-gpio/examples/onoff.js
 ```
 
-![Example: onoff.png](https://raw.githubusercontent.com/clebert/r-pi-gpio/master/example/onoff.png)
+![Example: onoff.png](https://raw.githubusercontent.com/clebert/r-pi-gpio/master/resources/onoff.png)
 
 > A quick word about the electronics involved. LEDs are Light Emitting Diodes and the diode part is important for us – they only pass electricity one way, so we need to make sure we put them in the right way round. They have a long leg and a slightly shorter leg. The long leg goes to the plus side and the shorter leg to the negative (or 0v) side. If we’re cut the legs short (as I have done here), then another way is to look at the side of the LED – there will be a flat section. Think of the flat as a minus sign and connect that to the 0v side of the circuit.
 >
