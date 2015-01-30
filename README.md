@@ -136,6 +136,8 @@ sudo node node_modules/r-pi-gpio/example/onoff.js
 
 - http://elinux.org/RPi_Low-level_peripherals
 - http://www.raspberrypi.org/wp-content/uploads/2012/02/BCM2835-ARM-Peripherals.pdf
+- https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/
+- http://www.petervis.com/electronics/Standard_Resistor_Values/330R.html
 
 ## Running Tests
 
