@@ -77,7 +77,9 @@ sudo node node_modules/r-pi-gpio/example/onoff.js
 >
 > -- [GPIO Examples - A single LED](https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/)
 
-## Raspberry Pi Model A/B (Rev 1.0)
+## Raspberry Pi GPIO Pin Layout
+
+### Raspberry Pi Model A/B (Rev 1.0)
 
 | Assignment         | Pin | Pin | Assignment         |
 | :----------------- | :-- | :-- | :----------------- |
@@ -95,7 +97,7 @@ sudo node node_modules/r-pi-gpio/example/onoff.js
 | GPIO 11 (SPI_SCLK) | 23  | 24  | GPIO 8 (SPI_CE0_N) |
 | GROUND             | 25  | 26  | GPIO 7 (SPI_CE1_N) |
 
-## Raspberry Pi Model A/B (Rev 2.0)
+### Raspberry Pi Model A/B (Rev 2.0)
 
 | Assignment         | Pin | Pin | Assignment         |
 | :----------------- | :-- | :-- | :----------------- |
@@ -113,7 +115,7 @@ sudo node node_modules/r-pi-gpio/example/onoff.js
 | GPIO 11 (SPI_SCLK) | 23  | 24  | GPIO 8 (SPI_CE0_N) |
 | GROUND             | 25  | 26  | GPIO 7 (SPI_CE1_N) |
 
-## Raspberry Pi Model B+
+### Raspberry Pi Model B+
 
 | Assignment         | Pin | Pin | Assignment         |
 | :----------------- | :-- | :-- | :----------------- |
