@@ -146,6 +146,7 @@ sudo node node_modules/r-pi-gpio/examples/onoff.js
 - [BCM2835 ARM Peripherals ](http://www.raspberrypi.org/wp-content/uploads/2012/02/BCM2835-ARM-Peripherals.pdf)
 - [GPIO Examples - A single LED](https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/)
 - [Standard Resistor Values](http://www.petervis.com/electronics/Standard_Resistor_Values/330R.html)
+- [Pull-up and Pull-down Resistors](http://www.bit-101.com/blog/?p=3813)
 
 ## Running Tests
 
