@@ -82,7 +82,7 @@ output(false);
 This example needs access to the physical memory, so it must run as root.
 
 ```sh
-sudo node node_modules/r-pi-gpio/examples/onoff.js
+sudo node examples/onoff.js
 ```
 
 ![Example: onoff.png](https://raw.githubusercontent.com/clebert/r-pi-gpio/master/resources/onoff.png)
@@ -131,7 +131,7 @@ sudo node node_modules/r-pi-gpio/examples/onoff.js
 | GPIO 11 (SPI_SCLK) | 23  | 24  | GPIO 8 (SPI_CE0_N) |
 | GROUND             | 25  | 26  | GPIO 7 (SPI_CE1_N) |
 
-### Raspberry Pi Model B+
+### Raspberry Pi Model B+ / Raspberry Pi 2 Model B
 
 | Assignment         | Pin | Pin | Assignment         |
 | :----------------- | :-- | :-- | :----------------- |
