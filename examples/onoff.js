@@ -3,22 +3,32 @@
 var gpio     = require('../lib/gpio.js');
 var readline = require('readline');
 
-var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+var main = function () {
+    var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
 
-var defaultPin = 4;
+    var defaultPin = 4;
 
-rl.question('pin (default ' + defaultPin + '): ', function (response) {
-    rl.close();
+    rl.question('pin (default ' + defaultPin + '): ', function (response) {
+        rl.close();
 
-    var pin     = parseInt(response, 10);
-    var trigger = gpio.createOutput(isNaN(pin) ? defaultPin : pin);
+        var pin     = parseInt(response, 10);
+        var trigger = gpio.createOutput(isNaN(pin) ? defaultPin : pin);
 
-    var level;
+        var level;
 
-    setInterval(function () {
-        trigger(level = !level);
-    }, 500);
+        setInterval(function () {
+            trigger(level = !level);
+        }, 500);
+    });
+};
+
+gpio.init(function (error) {
+    if (error) {
+        console.log(error);
+    } else {
+        main();
+    }
 });

@@ -1,7 +1,6 @@
 #include "gpio.h"
 
 #include <fcntl.h>
-#include <unistd.h>
 
 #include <sys/mman.h>
 
@@ -33,7 +32,7 @@ namespace RPiGpio {
         }
     }
 
-    volatile uint32_t *getMemory() {
+    volatile uint32_t *getMemory(const off_t offset) {
         const int32_t fd = open("/dev/mem", O_RDWR | O_SYNC);
 
         if (fd == -1) {
@@ -43,7 +42,6 @@ namespace RPiGpio {
         const size_t size = sysconf(_SC_PAGESIZE);
         const int32_t protection = PROT_READ | PROT_WRITE;
         const int32_t flags = MAP_SHARED;
-        const off_t offset = 0x20200000;
 
         volatile uint32_t *memory = (volatile uint32_t *) mmap(NULL, size, protection, flags, fd, offset);
 

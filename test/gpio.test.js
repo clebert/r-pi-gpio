@@ -11,7 +11,7 @@ var ts         = require('typesystem');
 var testAssertionErrors = function (method) {
     it('throws an assertion error', function () {
         assert.throws(function () {
-            method();
+            method(null, true);
         }, function (exception) {
             return exception.name === 'AssertionError';
         }, function (exception) {
@@ -40,7 +40,7 @@ describe('gpio', function () {
                 called += 1;
             };
 
-            gpio.createInput(53);
+            gpio.createInput(53, true);
 
             assert(function () {
                 return called === 1;
@@ -49,9 +49,9 @@ describe('gpio', function () {
 
         it('returns an input function', function () {
             assert(function () {
-                return ts.isFunction(gpio.createInput(0));
+                return ts.isFunction(gpio.createInput(0, true));
             }, function () {
-                return ts.isFunction(gpio.createInput(53));
+                return ts.isFunction(gpio.createInput(53, true));
             });
         });
 
@@ -62,7 +62,7 @@ describe('gpio', function () {
         var input;
 
         beforeEach(function () {
-            input = gpio.createInput(53);
+            input = gpio.createInput(53, true);
         });
 
         it('calls nativeGpio.getLevel() once with the given pin', function () {
@@ -114,7 +114,7 @@ describe('gpio', function () {
                 called += 1;
             };
 
-            gpio.createOutput(53);
+            gpio.createOutput(53, true);
 
             assert(function () {
                 return called === 1;
@@ -123,9 +123,9 @@ describe('gpio', function () {
 
         it('returns an output function', function () {
             assert(function () {
-                return ts.isFunction(gpio.createOutput(0));
+                return ts.isFunction(gpio.createOutput(0, true));
             }, function () {
-                return ts.isFunction(gpio.createOutput(53));
+                return ts.isFunction(gpio.createOutput(53, true));
             });
         });
 
@@ -136,7 +136,7 @@ describe('gpio', function () {
         var output;
 
         beforeEach(function () {
-            output = gpio.createOutput(53);
+            output = gpio.createOutput(53, true);
         });
 
         it('calls nativeGpio.setLevel() once with the given pin and a boolean level value', function () {

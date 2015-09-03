@@ -28,6 +28,22 @@ var gpio = require('r-pi-gpio');
 
 ## API
 
+### gpio.init(callback)
+
+Creates the memory mapping with a device-specific memory offset.
+
+**You must call this function only once and before any other function.**
+
+```javascript
+gpio.init(function (error) {
+    if (error) {
+        ...
+    } else {
+        ...
+    }
+});
+```
+
 ### gpio.createInput(pin)
 
 Creates a new GPIO input function and returns it.

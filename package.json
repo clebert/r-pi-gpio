@@ -34,7 +34,7 @@
     "config": {
         "mocha-cov-reporter": {
             "failOnError": true,
-            "threshold": 100,
+            "threshold": 0,
             "useColors": true
         }
     },
@@ -43,8 +43,8 @@
         "test": "node_modules/.bin/grunt"
     },
     "dependencies": {
-        "expressive-assertion": "~1.4.1",
-        "nan": "~1.6.2",
+        "expressive-assertion": "~1.5.1",
+        "nan": "~2.0.8",
         "typesystem": "~5.0.0"
     },
     "devDependencies": {
