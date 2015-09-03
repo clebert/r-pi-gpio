@@ -50,7 +50,7 @@ namespace {
         }
 
         if (memory == NULL) {
-            return Nan::ThrowError("unable to create memory mapping");
+            return Nan::ThrowError(Nan::NanErrnoException(errno, "init", "", NULL));
         }
 
         info.GetReturnValue().Set(Nan::Undefined());
