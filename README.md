@@ -1,16 +1,8 @@
+**THIS PROJECT IS NO LONGER MAINTAINED by clebert.**
+
 # r-pi-gpio
 
-> A high performance, memory mapped, Node.js API for [GPIO](http://en.wikipedia.org/wiki/General-purpose_input/output) on the Raspberry Pi.
-
-[![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/clebert/r-pi-gpio/master/LICENSE)
-[![npm](http://img.shields.io/npm/v/r-pi-gpio.svg?style=flat)](https://www.npmjs.org/package/r-pi-gpio)
-[![downloads](http://img.shields.io/npm/dm/r-pi-gpio.svg?style=flat)](https://www.npmjs.org/package/r-pi-gpio)
-
-[![build](http://img.shields.io/travis/clebert/r-pi-gpio/master.svg?style=flat)](https://travis-ci.org/clebert/r-pi-gpio)
-[![coverage](http://img.shields.io/coveralls/clebert/r-pi-gpio/master.svg?style=flat)](https://coveralls.io/r/clebert/r-pi-gpio)
-[![code climate](http://img.shields.io/codeclimate/github/clebert/r-pi-gpio.svg?style=flat)](https://codeclimate.com/github/clebert/r-pi-gpio)
-[![dependencies](http://img.shields.io/david/clebert/r-pi-gpio.svg?style=flat)](https://david-dm.org/clebert/r-pi-gpio#info=dependencies&view=table)
-[![devDependencies](http://img.shields.io/david/dev/clebert/r-pi-gpio.svg?style=flat)](https://david-dm.org/clebert/r-pi-gpio#info=devDependencies&view=table)
+> [Deprecated] A high performance, memory mapped, Node.js API for [GPIO](http://en.wikipedia.org/wiki/General-purpose_input/output) on the Raspberry Pi.
 
 ## Getting Started
 
